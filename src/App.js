@@ -13,8 +13,8 @@ import SavedBooks from "./pages/SavedBooks";
 import Navbar from "./components/Navbar";
 
 const httpLink = createHttpLink([
-  uri: process.env.MONGODB_URI || "http://localhost:4000",
-  Credentials: "same-origin",
+  uri: process.env.MONGODB_URI  || "http://localhost:3000",
+  credentials: "same-origin",
 ]);
 
 const authLink = setContext((_, { headers }) => {
