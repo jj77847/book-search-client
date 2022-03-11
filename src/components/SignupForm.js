@@ -45,7 +45,7 @@ const SignupForm = () => {
     }
 
     try {
-      const { data, error } = executeAddUser({
+      const { data, error } = await executeAddUser({
         variables: {
           input: userFormData,
         },
