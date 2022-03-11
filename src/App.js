@@ -12,10 +12,10 @@ import SearchBooks from "./pages/SearchBooks";
 import SavedBooks from "./pages/SavedBooks";
 import Navbar from "./components/Navbar";
 
-const httpLink = createHttpLink([
-  uri: process.env.MONGODB_URI  || "http://localhost:3000",
+const httpLink = createHttpLink({
+  uri: process.env.MONGODB_URI || "http://localhost:4000",
   credentials: "same-origin",
-]);
+});
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
@@ -36,16 +36,16 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-    <Router>
-      <>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={SearchBooks} />
-          <Route exact path="/saved" component={SavedBooks} />
-          <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
-        </Switch>
-      </>
-    </Router>
+      <Router>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={SearchBooks} />
+            <Route exact path="/saved" component={SavedBooks} />
+            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+          </Switch>
+        </>
+      </Router>
     </ApolloProvider>
   );
 }
