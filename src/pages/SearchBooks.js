@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { saveBook, searchGoogleBooks } from "../utils/API";
+import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 import { useMutation } from "@apollo/client";
 
@@ -92,14 +92,13 @@ const SearchBooks = () => {
     }
 
     try {
-      await executeSaveBook({
+      const { error } = await executeSaveBook({
         variables: {
           input: bookToSave,
         },
       });
-      const response = await saveBook(bookToSave, token);
 
-      if (!response.ok) {
+      if (error) {
         throw new Error("something went wrong!");
       }
 
